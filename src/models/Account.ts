@@ -5,10 +5,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import bcrypt from "bcryptjs";
 
 @Entity("accounts")
-export default class User {
+class Account {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,15 +17,14 @@ export default class User {
   @Column()
   password: string;
 
+  @Column()
+  status: string;
+
   @Column("timestamp")
   created_at: string;
 
   @Column("timestamp")
   updated_at: string;
-
-  @BeforeInsert()
-  @BeforeUpdate()
-  encryptPassword() {
-    this.password = bcrypt.hashSync(this.password, 8);
-  }
 }
+
+export default Account;

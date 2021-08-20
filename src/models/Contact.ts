@@ -1,24 +1,18 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("users")
-export default class User {
+export default class Contact {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  account_id: string;
+  users_id: string;
 
   @Column()
-  name: string;
+  email: string;
 
   @Column()
-  cpf: string;
-
-  @Column("date")
-  birthday: Date;
-
-  @Column()
-  mothers_name: string;
+  phone: string;
 
   @Column("timestamp")
   created_at: string;

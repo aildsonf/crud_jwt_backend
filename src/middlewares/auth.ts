@@ -7,7 +7,7 @@ if (!process.env.JWT_SECRET) {
 }
 const jwt_secret = String(process.env.JWT_SECRET);
 
-export default function authMiddleware(authorization: any) {
+export default function authMiddleware(authorization: string) {
   if (!authorization) {
     // return status 401
   }

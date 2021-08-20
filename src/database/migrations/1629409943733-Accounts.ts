@@ -1,22 +1,29 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateUsersTable1629358844829 implements MigrationInterface {
+export class Accounts1629409943733 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    if (!queryRunner.hasSchema("fcxlabs_project")) {
+      await queryRunner.createSchema("fcxlabs_project");
+    }
+
     await queryRunner.createTable(
       new Table({
-        name: "users",
+        name: "accounts",
         columns: [
           {
             name: "id",
             type: "integer",
             isPrimary: true,
+            isGenerated: true,
             generationStrategy: "increment",
-            default: "1",
           },
-          { name: "name", type: "varchar", isNullable: false },
-          { name: "cpf", type: "varchar", isNullable: false },
-          { name: "birthday", type: "date", isNullable: false },
-          { name: "mothers_name", type: "varchar" },
+          { name: "login", type: "varchar", isNullable: false },
+          { name: "password", type: "varchar", isNullable: false },
+          {
+            name: "status",
+            type: "varchar",
+            isNullable: false,
+          },
           { name: "created_at", type: "timestamp", default: "now()" },
           { name: "updated_at", type: "timestamp", default: "now()" },
         ],
@@ -26,6 +33,6 @@ export class CreateUsersTable1629358844829 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("users");
+    await queryRunner.dropSchema("accounts");
   }
 }

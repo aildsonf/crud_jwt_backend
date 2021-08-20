@@ -4,13 +4,12 @@
   "port": 3306,
   "username": "root",
   "password": "root",
-  "database": "fcxlabs-project",
-  "synchronize": true,
-  "logging": false,
-  "entities": ["src/models/*.ts"],
-  "migrations": ["src/database/migrations/*.ts"],
+  "database": "fcxlabs_project",
+  "entities": ["dist/models/*.js"],
+  "migrations": ["dist/database/migrations/*.js"],
   "cli": {
     "entitiesDir": "src/models",
     "migrationsDir": "src/database/migrations"
-  }
+  },
+  "logging": ["query", "error"]
 }
