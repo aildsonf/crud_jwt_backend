@@ -5,8 +5,8 @@
   "username": "root",
   "password": "root",
   "database": "fcxlabs_project",
-  "entities": ["dist/models/*.js"],
-  "migrations": ["dist/database/migrations/*.js"],
+  "entities": ["dist/models/*.{js,ts}"],
+  "migrations": ["dist/database/migrations/*.{js,ts}"],
   "cli": {
     "entitiesDir": "src/models",
     "migrationsDir": "src/database/migrations"

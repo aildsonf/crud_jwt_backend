@@ -1,14 +1,15 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 // local imports
 import AuthController from "../controllers/AuthController";
+import authMiddleware from "../middlewares/auth";
 
 const authRouter: Router = Router();
 
-authRouter.post("/auth", (req: Request, res: Response) => {
-  console.log("POST /api/auth");
-  AuthController.authenticate(req.body)
-    .then((payload) => res.send(payload))
-    .catch((err) => res.send(err));
-});
+authRouter.post("/auth/login", AuthController.authenticate);
+authRouter.post(
+  "/forgot-password",
+  [authMiddleware],
+  AuthController.changePassword
+);
 
 export default authRouter;

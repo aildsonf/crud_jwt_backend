@@ -1,22 +1,36 @@
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
+import { NextFunction, Request, Response } from "express";
 
 dotenv.config();
 if (!process.env.JWT_SECRET) {
   process.exit(1);
 }
-const jwt_secret = String(process.env.JWT_SECRET);
+const jwtSecret = process.env.JWT_SECRET;
 
-export default function authMiddleware(authorization: string) {
-  if (!authorization) {
-    // return status 401
-  }
+export default async function authMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const token = String(req.headers.authorization).replace("Bearer", "").trim();
 
-  const token = authorization.replace("Bearer", "").trim();
+  let jwtPayload;
 
   try {
-    const data = jwt.verify(token, jwt_secret);
-  } catch {
-    // return status 401
+    jwtPayload = <any>jwt.verify(token, jwtSecret);
+    res.locals.jwtPayload = jwtPayload;
+  } catch (e) {
+    res.status(401).json({ message: "UNAUTHORIZED / token is NOT VALID" });
+    return;
   }
+
+  const { userId, login }: any = jwtPayload;
+
+  const newToken = jwt.sign({ userId, login }, jwtSecret, {
+    expiresIn: "1d",
+  });
+  res.setHeader("token", newToken);
+
+  next();
 }
