@@ -1,0 +1,15 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "root",
+  "database": "fcxlabs_project",
+  "entities": ["dist/models/*.{js,ts}"],
+  "migrations": ["dist/database/migrations/*.{js,ts}"],
+  "cli": {
+    "entitiesDir": "src/models",
+    "migrationsDir": "src/database/migrations"
+  },
+  "logging": ["query", "error"]
+}
