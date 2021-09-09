@@ -1,4 +1,4 @@
-# &#127758; **Projeto - FCxLabs 2021 (Backend)**
+# &#127758; **Simple User Registration System with TypeScript (Backend)**
 
 <br>
 
