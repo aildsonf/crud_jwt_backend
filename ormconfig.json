@@ -4,7 +4,7 @@
   "port": 3306,
   "username": "root",
   "password": "root",
-  "database": "fcxlabs_project",
+  "database": "schema",
   "entities": ["dist/models/*.{js,ts}"],
   "migrations": ["dist/database/migrations/*.{js,ts}"],
   "cli": {
